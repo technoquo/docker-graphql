@@ -31,7 +31,7 @@ jobs:
         
     - name: Push Docker Image
       run: |
-        docker push lelobo/docker-graphl:0.0.2 .
+        docker push lelobo/docker-graphl:0.0.2
         
     
     
