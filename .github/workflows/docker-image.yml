@@ -18,14 +18,21 @@ jobs:
       with:
         fetch-depth: 0
     
-    - name: Docker login
+    - name: Docker Login
       env:
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      run: |
-        echo "Iniciando login"
+      run: |        
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-        echo "Fin del login"
+        
+    - name: Build Docker Image
+      run: |
+        docker build -t lelobo/docker-graphl:0.0.2 .
+        
+    - name: Push Docker Image
+      run: |
+        docker push lelobo/docker-graphl:0.0.2 .
+        
     
     
  #   - name: Build the Docker image
