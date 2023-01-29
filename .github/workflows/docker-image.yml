@@ -28,10 +28,12 @@ jobs:
     - name: Build Docker Image
       run: |
         docker build -t lelobo/docker-graphl:0.0.2 .
+        docker build -t lelobo/docker-graphl:latest .
         
     - name: Push Docker Image
       run: |
         docker push lelobo/docker-graphl:0.0.2
+        docker push lelobo/docker-graphl:latest
         
     
     
