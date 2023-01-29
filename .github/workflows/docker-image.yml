@@ -31,20 +31,23 @@ jobs:
       env:
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        NEW_VERSION: ${{ steps.version.outputs.version }}
-      run: |        
-        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-        echo "New version: $NEW_VERSION!!!!!"
         
-#    - name: Build Docker Image
-#      run: |
-#        docker build -t lelobo/docker-graphl:0.0.2 .
-#        docker build -t lelobo/docker-graphl:latest .
-#        
-#    - name: Push Docker Image
-#      run: |
-#        docker push lelobo/docker-graphl:0.0.2
-#        docker push lelobo/docker-graphl:latest
+      run: |        
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD       
+        
+    - name: Build Docker Image
+      env:
+        NEW_VERSION: ${{ steps.version.outputs.version }}
+      run: |
+        docker build -t lelobo/docker-graphl:$NEW_VERSION .
+        docker build -t lelobo/docker-graphl:latest .
+        
+    - name: Push Docker Image
+      env:
+        NEW_VERSION: ${{ steps.version.outputs.version }}
+      run: |
+        docker push lelobo/docker-graphl:$NEW_VERSION
+        docker push lelobo/docker-graphl:latest
         
     
     
